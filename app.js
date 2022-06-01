@@ -8,6 +8,7 @@ app.get("/",function(req,res){
   res.sendFile(__dirname + "/index.html")
 })
 
+// api id & url
 app.post("/",function(req,res){
 const cityName =req.body.cityName;
 const query = cityName;
@@ -15,9 +16,12 @@ const query = cityName;
   const url ="https://api.openweathermap.org/data/2.5/weather?q="+ query+"&appid="+appID+"&units=metric"
 
   https.get(url,function(response){
-    console.log(response.statusCode);
-
-    response.on("data",function(data){
+    
+     //Using statusCode for getting type of error
+     console.log(response.statusCode);
+    
+     // for rendering data to html file
+     response.on("data",function(data){
       var weatherdata =JSON.parse(data)
       var temp =weatherdata.main.temp
       var icon =weatherdata.weather[0].icon
